@@ -14,14 +14,12 @@ from fracman_macros import add_blocks_to_file
 
 
 number_of_realizations = 100
-result_path = r'V:\RTKC\Bingham Canyon\CX21495304_NPB_FS\FS2400_Method_Calibrations\Wall_Scale\RUN_4\02_Output_Files\12_Recompiled_Results\03_Final_CSV\Run_4_Sensitivity'
-result_file = 'Run_4_Sensitivity_3DPOF_Results.csv'
+result_path = r'C:/Projects/DRAFT_OUTPUT/Fortuna'
+result_file = 'Fortuna_Sensitivity_3DPOF_Results.csv'
 
-fracman_csv_file = r'V:\RTKC\Bingham Canyon\CX21495304_NPB_FS\FS2400_Method_Calibrations\Wall_Scale\FM_HeatMap\02_Filtered_Stats\realization_{}.csv'
+fracman_csv_file = r'V:\RTKC\Bingham Canyon\CX21495304_NPB_FS\FS2400_Method_Calibrations\Wall_Scale\FM_HeatMap\02_Filtered_Stats\stats-realization_{}.csv'
 
-case_dir = 'Run_4_Sens'
-
-output_path = r'V:\RTKC\Bingham Canyon\CX21495304_NPB_FS\FS2400_Method_Calibrations\Wall_Scale\FM_HeatMap\05_Macros\{}\Initial_Blocks_Delete'.format(case_dir)
+output_path = r'C:\Projects\DRAFT_OUTPUT\Fortuna\Macros\Initial_Blocks_Delete'
 
 
 
@@ -77,7 +75,7 @@ for real in tqdm(list(range(1,number_of_realizations + 1))):
     block_data = df_data[(df_data['Realization'] == 'realization_{}'.format(real))]
     stable_blocks = list(block_data[block_data['FOS'] >= 1]['Block Id'])
     
-    output_path = r'V:\RTKC\Bingham Canyon\CX21495304_NPB_FS\FS2400_Method_Calibrations\Wall_Scale\FM_HeatMap\05_Macros\{}\Ru_0.4_Blocks'.format(case_dir)
+    output_path = r'C:\Projects\DRAFT_OUTPUT\Fortuna\Macros\\Ru_0.4_Blocks'
     macro_file_name  = 'real_{}_delete_blocks.fmf'.format(real)
     macro_file_path = os.path.join(output_path, macro_file_name)
     
@@ -94,7 +92,7 @@ for real in tqdm(list(range(1,number_of_realizations + 1))):
     
     blocks_to_delete = [x for x in ru_04_unstable_blocks if x not in ru_03_unstable_blocks]
     
-    output_path = r'V:\RTKC\Bingham Canyon\CX21495304_NPB_FS\FS2400_Method_Calibrations\Wall_Scale\FM_HeatMap\05_Macros\{}\Ru_0.3_Blocks'.format(case_dir)
+    output_path = r'VC:\Projects\DRAFT_OUTPUT\Fortuna\Macros\Ru_0.3_Blocks'
     macro_file_name  = 'real_{}_delete_blocks.fmf'.format(real)
     macro_file_path = os.path.join(output_path, macro_file_name)
     
@@ -109,7 +107,7 @@ for real in tqdm(list(range(1,number_of_realizations + 1))):
     
     blocks_to_delete = [x for x in ru_03_unstable_blocks if x not in ru_02_unstable_blocks]
     
-    output_path = r'V:\RTKC\Bingham Canyon\CX21495304_NPB_FS\FS2400_Method_Calibrations\Wall_Scale\FM_HeatMap\05_Macros\{}\Ru_0.2_Blocks'.format(case_dir)
+    output_path = r'C:\Projects\DRAFT_OUTPUT\Fortuna\Macros\Ru_0.2_Blocks'
     macro_file_name  = 'real_{}_delete_blocks.fmf'.format(real)
     macro_file_path = os.path.join(output_path, macro_file_name)
     
@@ -124,7 +122,7 @@ for real in tqdm(list(range(1,number_of_realizations + 1))):
     
     blocks_to_delete = [x for x in ru_02_unstable_blocks if x not in ru_01_unstable_blocks]
     
-    output_path = r'V:\RTKC\Bingham Canyon\CX21495304_NPB_FS\FS2400_Method_Calibrations\Wall_Scale\FM_HeatMap\05_Macros\{}\Ru_0.1_Blocks'.format(case_dir)
+    output_path = r'C:\Projects\DRAFT_OUTPUT\Fortuna\Macros\Ru_0.1_Blocks'
     macro_file_name  = 'real_{}_delete_blocks.fmf'.format(real)
     macro_file_path = os.path.join(output_path, macro_file_name)
     
@@ -139,7 +137,7 @@ for real in tqdm(list(range(1,number_of_realizations + 1))):
     
     blocks_to_delete = [x for x in ru_01_unstable_blocks if x not in dry_unstable_blocks]
     
-    output_path = r'V:\RTKC\Bingham Canyon\CX21495304_NPB_FS\FS2400_Method_Calibrations\Wall_Scale\FM_HeatMap\05_Macros\{}\Dry_Blocks'.format(case_dir)
+    output_path = r'C:\Projects\DRAFT_OUTPUT\Fortuna\Macros\Dry_Blocks'
     macro_file_name  = 'real_{}_delete_blocks.fmf'.format(real)
     macro_file_path = os.path.join(output_path, macro_file_name)
     

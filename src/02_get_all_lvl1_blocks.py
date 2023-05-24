@@ -16,24 +16,27 @@ def get_sn(real):
     '''
     return int(real.split('_')[-1])
 
-output_path = r'V:\RTKC\Bingham Canyon\CX21495304_NPB_FS\FS2400_Method_Calibrations\Wall_Scale\FM_HeatMap/08_Python/OUTPUT'
+output_path = r'C:/Projects/DRAFT_OUTPUT/Fortuna'
 if not os.path.exists(output_path):
     os.makedirs(output_path)
 
-real_file_path = r'V:\RTKC\Bingham Canyon\CX21495304_NPB_FS\FS2300_Model_Build\08_WallScale\Run3_KUC_QS\Post-Processing\05_Blocks'
+real_file_path = r'V:\RTKC\Bingham Canyon\31405526.002 - EW Extension\02_Output_Files\05_Block_Files\016d-ewextension-double\TREND-180_IRA-45'
 dir_list = os.listdir(real_file_path)
 
 #get rid of first elemnet which is .hub
-dir_list = dir_list[1:]
+clean_dir_list = dir_list.copy()
+for i, dirc in enumerate(dir_list):
+    if not os.path.isdir(os.path.join(real_file_path,dirc)):
+        clean_dir_list.pop(0)
 
-dir_list.sort(key=get_sn)
+clean_dir_list.sort(key=get_sn)
 
-all_block_df = pd.read_csv(r'V:\RTKC\Bingham Canyon\CX21495304_NPB_FS\FS2400_Method_Calibrations\Wall_Scale\FM_HeatMap\08_Python/wall_scale_all_blocks.csv',  index_col=0)
+all_block_df = pd.read_csv(r'C:/Projects/DRAFT_OUTPUT/Fortuna/fortuna_all_blocks.csv',  index_col=0)
 
-for real in tqdm(dir_list):
+for real in tqdm(clean_dir_list):
     
     j = get_sn(real)
-    real_results_path = os.path.join(output_path, 'Realization_{}'.format(j))
+    real_results_path = os.path.join(output_path, 'Realization_{}'.format(str(j).zfill(4)))
     if not os.path.exists(real_results_path):
         os.makedirs(real_results_path)
     

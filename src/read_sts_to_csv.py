@@ -14,25 +14,32 @@ def get_sn(real):
     '''
     get realization number from str in the from of 'Stats_rea-xx.sts'
     '''
-    return int(real.split('.')[0].split('-')[-1])
+    return int(real.split('\\')[-1].split('.')[0].split('-')[-1])
 
 
-sts_files_directory = r'V:\RTKC\Bingham Canyon\CX21495304_NPB_FS\FS2300_Model_Build\08_WallScale\Run3_KUC_QS\Post-Processing\04_Stats'
+sts_files_directory = r'V:\RTKC\Bingham Canyon\31405526.002 - EW Extension\02_Output_Files\05_Block_Files\016d-ewextension-double\TREND-180_IRA-45'
 dir_list = os.listdir(sts_files_directory)
 sts_file_list = []
 
-for dirc in dir_list:
-    if '.sts' not in dirc:
-        continue
+print('Get .sts file list...')
+for dirc in tqdm(dir_list):
+    if os.path.isdir(os.path.join(sts_files_directory,dirc)):
+        sts_file = glob.glob(os.path.join(sts_files_directory,dirc) + '\*.sts')
+    # if '.sts' not in dirc:
+    #     continue
     
-    sts_file_list.append(os.path.join(sts_files_directory,dirc))
+        sts_file_list.append(sts_file[-1])
+
+print('Found {} .sts files'.format(len(sts_file_list)))
 
 # sort sts list by realization number
 sts_file_list.sort(key=get_sn)
+print('Done \n')
 
 main_df = pd.DataFrame()
 
-for k, sts_file in enumerate(tqdm([sts_file_list[0]])):
+for k, sts_file in enumerate([sts_file_list[0]]):
+    print('Reading file no: {}'.format(k))
     
     with open(sts_file, 'r') as f:
         lines = f.readlines()
@@ -46,7 +53,7 @@ for k, sts_file in enumerate(tqdm([sts_file_list[0]])):
     
     df = pd.DataFrame(columns=columns)
 
-    for line in data[1:]:
+    for line in tqdm(data[1:]):
             row = line.replace(' ', '').split('\t')[:-1]
             
             # if row[1] != '1':
